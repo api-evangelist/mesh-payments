@@ -1,0 +1,41 @@
+generated: '2026-08-04'
+method: searched
+source: https://api.meshpayments.com/.well-known/openid-configuration
+docs: https://developers.meshpayments.com
+docs_note: the developers portal that would carry the scope/permission reference returns
+  401 (HTTP Basic) to the public, so only the scopes the authorization server advertises
+  anonymously are recorded.
+schemes:
+- name: Mesh Payments authorization server
+  issuer: https://api.meshpayments.com
+  source: https://api.meshpayments.com/.well-known/openid-configuration
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.meshpayments.com/as/authorize
+    tokenUrl: https://api.meshpayments.com/as/token
+  - flow: clientCredentials
+    tokenUrl: https://api.meshpayments.com/as/token
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://api.meshpayments.com/oauth2/device_authorization
+    tokenUrl: https://api.meshpayments.com/as/token
+scopes:
+- scope: openid
+  description: OpenID Connect authentication scope; requests an ID token from the Mesh
+    authorization server.
+  flows:
+  - authorizationCode
+  sources:
+  - https://api.meshpayments.com/.well-known/openid-configuration
+gaps:
+- scopes_supported on the discovery document lists only "openid". Any API or MCP resource
+  scopes Mesh issues are not advertised anonymously, and the RFC 9728 protected-resource
+  metadata for https://api.meshpayments.com/mcp omits the optional scopes_supported
+  member. Publishing scopes_supported on the protected-resource metadata would let an
+  agent discover the permission surface without credentials.
+x-evidence:
+- fetched: '2026-08-04'
+  url: https://api.meshpayments.com/.well-known/openid-configuration
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://api.meshpayments.com/.well-known/oauth-protected-resource/mcp
+  http_status: 200

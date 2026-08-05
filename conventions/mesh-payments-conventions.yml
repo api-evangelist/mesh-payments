@@ -1,0 +1,73 @@
+generated: '2026-08-04'
+method: searched
+source: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+docs: https://developers.meshpayments.com
+docs_note: the cross-cutting request/response semantics reference is on the Mesh Developers
+  Portal, which returns 401 (HTTP Basic) to the public. Only conventions Mesh states
+  publicly, or that are observable on the live authorization server, are recorded.
+  Nothing below is inferred from an unseen spec.
+architecture:
+  style: REST
+  base_url: https://api.meshpayments.com
+  media_type: unknown
+authentication:
+  styles:
+  - HMAC-SHA256 request signing
+  - OAuth 2.0 client credentials bearer token
+  reference: authentication/mesh-payments-authentication.yml
+  token_binding: DPoP and mTLS certificate-bound access tokens are both advertised
+    by the authorization server
+idempotency:
+  supported: unknown
+  note: Mesh publishes no idempotency-key contract on any anonymously readable page,
+    and there is no public OpenAPI in which to observe an Idempotency-Key parameter.
+    Recorded as unknown rather than assumed. No Idempotency pointer is wired in apis.yml
+    because we could not verify one exists.
+pagination:
+  style: unknown
+  note: not documented publicly
+versioning:
+  scheme: unknown
+  note: no version segment is observable anonymously; the authorization server paths
+    are unversioned (/as/token, /oauth2/revoke)
+error_envelope:
+  format: unknown
+  note: no anonymously readable error reference
+rate_limiting:
+  documented: false
+  note: no published rate limits or rate-limit response headers
+request_tracing:
+  request_id_header: unknown
+metadata:
+  supported: true
+  description: The API supports adding metadata to objects for tracking purposes.
+  source: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+capabilities_published:
+- verify connectivity
+- issue, suspend and cancel virtual cards
+- configure merchant and category limitations
+- attach metadata for tracking
+- retrieve authorization and settlement data
+- retrieve real-time account balance
+webhooks:
+  reference: asyncapi/mesh-payments-webhooks.yml
+security_headers_observed:
+  host: api.meshpayments.com
+  strict_transport_security: max-age=31536000; includeSubDomains
+  x_content_type_options: nosniff
+  x_frame_options: DENY
+  cache_control: no-cache, no-store, max-age=0, must-revalidate
+  cors: Vary on Origin, Access-Control-Request-Method and Access-Control-Request-Headers
+gaps:
+- Idempotency, pagination, versioning, rate limiting, request tracing and the error
+  envelope are all undocumented on any public surface. For a card-issuing API where
+  a retried create-card call has a real financial consequence, an anonymously readable
+  idempotency contract is the single highest-value thing Mesh could publish.
+x-evidence:
+- fetched: '2026-08-04'
+  url: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://api.meshpayments.com/
+  http_status: 401
+  note: security headers above read from this response

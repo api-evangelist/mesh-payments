@@ -1,0 +1,93 @@
+generated: '2026-08-04'
+method: searched
+source: live discovery documents on api.meshpayments.com plus published Mesh security
+  and help-center pages
+standards:
+- id: oauth2
+  conforms: true
+  evidence: RFC 6749 authorization server live at https://api.meshpayments.com/as/token
+    with authorization_code, client_credentials, refresh_token, device_code and token-exchange
+    grants
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 with a complete metadata
+    document
+- id: oidc-discovery
+  conforms: true
+  evidence: /.well-known/openid-configuration returns 200; id_token_signing_alg_values_supported
+    RS256, userinfo and end_session endpoints present
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: /.well-known/oauth-protected-resource and /.well-known/oauth-protected-resource/mcp
+    both return 200 and are referenced from the MCP endpoint's WWW-Authenticate Bearer
+    challenge
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported is ["S256"]
+- id: rfc9449-dpop
+  conforms: true
+  evidence: dpop_signing_alg_values_supported advertises nine RS/PS/ES algorithms
+- id: rfc8705-mtls-client-auth
+  conforms: true
+  evidence: tls_client_auth and self_signed_tls_client_auth in token_endpoint_auth_methods_supported;
+    tls_client_certificate_bound_access_tokens is true
+- id: rfc8693-token-exchange
+  conforms: true
+  evidence: urn:ietf:params:oauth:grant-type:token-exchange in grant_types_supported
+- id: rfc8628-device-authorization-grant
+  conforms: true
+  evidence: device_authorization_endpoint at /oauth2/device_authorization
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint at https://api.meshpayments.com/as/register
+- id: rfc7662-token-introspection
+  conforms: true
+  evidence: introspection_endpoint at https://api.meshpayments.com/oauth2/introspect
+- id: rfc7009-token-revocation
+  conforms: true
+  evidence: revocation_endpoint at https://api.meshpayments.com/oauth2/revoke
+- id: model-context-protocol
+  conforms: true
+  evidence: JSON-RPC MCP endpoint at https://api.meshpayments.com/mcp gated by OAuth
+    bearer with RFC 9728 resource metadata; Mesh describes its orchestration layer as
+    MCP-compatible
+- id: saml-sso
+  conforms: true
+  evidence: SAML SSO with passwordless access listed on https://meshpayments.com/security-is-our-priority/
+- id: pci-dss
+  conforms: true
+  evidence: 'published as PCI DSS compliant at Level 1 Service Provider on https://meshpayments.com/security-is-our-priority/'
+- id: soc2-type-ii
+  conforms: true
+  evidence: SOC 1 and SOC 2 Type II, audited annually by KPMG, monitored with Drata
+- id: gdpr
+  conforms: true
+  evidence: stated on https://meshpayments.com/security-is-our-priority/ and https://meshpayments.com/privacy/
+- id: ccpa
+  conforms: true
+  evidence: stated on https://meshpayments.com/security-is-our-priority/
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on meshpayments.com and 401 on api.meshpayments.com
+- id: openapi
+  conforms: false
+  evidence: no OpenAPI or Swagger document is reachable anonymously on any Mesh host;
+    every spec path on api.meshpayments.com returns 401/403 and the developers portal
+    is behind HTTP Basic auth
+- id: asyncapi
+  conforms: false
+  evidence: webhooks are documented in prose in the help center but no AsyncAPI document
+    is published
+- id: rfc9457-problem-details
+  conforms: unknown
+  evidence: no anonymously readable error reference or spec to determine the error
+    envelope
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 or
+    401 on every Mesh host
+- id: iso-27001
+  conforms: false
+  evidence: not claimed on any published Mesh security or compliance page
+x-evidence:
+  fetched: '2026-08-04'

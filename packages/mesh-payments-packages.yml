@@ -1,0 +1,68 @@
+generated: '2026-08-04'
+method: searched
+source: registry searches plus the Mesh help center and GitHub organization
+packages: []
+packages_note: No first-party Mesh Payments client library was found in any public
+  package registry. Mesh ships authentication code SAMPLES, not installable SDKs, and
+  the samples repository has been archived. No SDKs pointer is wired in apis.yml because
+  no client library exists to point at.
+registries_searched:
+- registry: npm
+  query: meshpayments, mesh-payments
+  result: no first-party package (only unrelated 3D "mesh" libraries)
+- registry: pypi
+  query: meshpayments, mesh-payments
+  result: 404
+- registry: rubygems
+  query: meshpayments
+  result: 404
+- registry: packagist
+  query: meshpayments/mesh
+  result: 404
+- registry: maven-central
+  result: none found
+- registry: nuget
+  result: none found
+- registry: pkg.go.dev
+  result: none found
+- registry: crates.io
+  result: none found
+code_samples:
+- name: hmac-auth-examples
+  url: https://github.com/mesh-payments/hmac-auth-examples
+  official: true
+  kind: code samples, not a distributable package
+  languages:
+  - Postman
+  - Python 3+
+  - Node.js 10+
+  - Java 8+
+  - .NET C#
+  - PHP
+  license: Apache-2.0
+  status: archived 2026-05-24, read-only
+  description: Examples in various languages showing how to perform HMAC authentication
+    against the Mesh Payments API.
+- name: Developers Portal code samples
+  url: https://developers.meshpayments.com
+  official: true
+  kind: in-documentation samples for both authentication methods
+  languages:
+  - Python
+  - Node.js
+  - Java
+  - C#
+  - PHP
+  access: gated behind HTTP Basic authentication (401 to the public)
+  source: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+github_organization:
+  url: https://github.com/mesh-payments
+  public_repos: 6
+  note: five of the six are internal GitHub Actions tooling and forks (mermaid-live-editor,
+    action-test-report-comment, action-branch-name, action-wait-for-response, fe-test);
+    only hmac-auth-examples relates to the API, and it is archived.
+gaps:
+- No installable client library in any language. Every integrator hand-rolls HMAC signing
+  or OAuth token handling from samples, and the only public sample repository is archived.
+x-evidence:
+  fetched: '2026-08-04'

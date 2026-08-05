@@ -1,0 +1,45 @@
+generated: '2026-08-04'
+method: searched
+source: https://kb.meshpayments.com/support/integrators-corner/how-to-set-up-the-mesh-webhooks-integration/
+spec_type: none
+spec_note: Mesh publishes no AsyncAPI document. The webhook surface is documented in
+  prose in the public help center; the full event catalogue, payload schemas and signature
+  scheme live on the developers portal, which is behind HTTP Basic authentication.
+webhooks:
+  supported: true
+  configuration: self-serve, in-product
+  setup:
+  - Sign in to the Mesh platform with an Admin profile, or an Employee profile holding
+    Tech Admin permissions for the Mesh Integration Portal.
+  - Open Company Settings.
+  - Scroll to the Integrations section and click Go to Integrations Portal.
+  - Open the Integrations Store and find the Other section.
+  - Enable the integration, enter the webhooks URL, select the events to send, and
+    click Update.
+  delivery: HTTP POST to a customer-supplied webhook URL
+  event_selection: subscriber chooses which events to send when enabling the integration
+events:
+- name: card charge
+  description: Emitted when a card charge event occurs. This is the only event Mesh
+    names on the publicly readable help-center page; the selectable event list is shown
+    in-product and enumerated on the gated developers portal.
+  source: https://kb.meshpayments.com/support/integrators-corner/how-to-set-up-the-mesh-webhooks-integration/
+  confidence: high
+events_note: NOT a complete catalogue. Only events Mesh names publicly are recorded.
+  No events were inferred, and none were copied from the in-product picker.
+gaps:
+- No AsyncAPI document, so the event surface cannot be consumed by tooling.
+- No public event reference - the selectable event names, payload schemas, delivery
+  guarantees, retry/backoff policy and signature verification scheme are all documented
+  only behind the developers-portal Basic auth gate.
+- No signing or verification method is described anywhere publicly, so a receiver
+  cannot learn how to authenticate an inbound Mesh webhook without credentials.
+x-evidence:
+- fetched: '2026-08-04'
+  url: https://kb.meshpayments.com/support/integrators-corner/how-to-set-up-the-mesh-webhooks-integration/
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+  http_status: 200
+  note: confirms Mesh offers webhook integration for event notifications alongside
+    the REST API

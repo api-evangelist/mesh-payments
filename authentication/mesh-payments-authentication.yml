@@ -1,0 +1,110 @@
+generated: '2026-08-04'
+method: searched
+source: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+docs: https://developers.meshpayments.com
+docs_note: the full authentication reference and code samples live on the Mesh Developers
+  Portal, which is served behind CloudFront HTTP Basic authentication (401 to the public);
+  everything below is derived from the publicly readable help-center article, the archived
+  first-party HMAC example repository, and the live OAuth/OIDC discovery documents
+  on api.meshpayments.com
+summary:
+  types:
+  - http
+  - oauth2
+  - custom-hmac
+  oauth2_flows:
+  - clientCredentials
+  - authorizationCode
+  - deviceCode
+  - tokenExchange
+  api_key_in: []
+schemes:
+- name: HMAC-SHA256 request signing
+  type: custom
+  scheme: hmac
+  algorithm: HMAC-SHA256
+  description: Mesh's help center states the REST API supports HMAC-SHA256 request
+    signing. First-party reference implementations were published in Postman, Python
+    3+, Node.js 10+, Java 8+, .NET C# and PHP.
+  source: https://github.com/mesh-payments/hmac-auth-examples
+  source_status: archived 2026-05-24, read-only
+  note: the exact canonical string, header names and clock-skew window are documented
+    only on the gated developers portal, so they are not recorded here.
+- name: OAuth 2.0 client credentials
+  type: oauth2
+  description: Machine-to-machine access token issuance for server-side API clients.
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.meshpayments.com/as/token
+  source: https://api.meshpayments.com/.well-known/oauth-authorization-server
+- name: OAuth 2.0 / OpenID Connect authorization server
+  type: openIdConnect
+  openIdConnectUrl: https://api.meshpayments.com/.well-known/openid-configuration
+  issuer: https://api.meshpayments.com
+  description: Mesh runs a full OAuth 2.0 authorization server with OIDC discovery.
+    It is the authorization server named by the MCP endpoint's RFC 9728 protected-resource
+    metadata.
+  endpoints:
+    authorization: https://api.meshpayments.com/as/authorize
+    token: https://api.meshpayments.com/as/token
+    device_authorization: https://api.meshpayments.com/oauth2/device_authorization
+    userinfo: https://api.meshpayments.com/as/userinfo
+    jwks: https://api.meshpayments.com/as/jwks
+    revocation: https://api.meshpayments.com/oauth2/revoke
+    introspection: https://api.meshpayments.com/oauth2/introspect
+    registration: https://api.meshpayments.com/as/register
+    end_session: https://api.meshpayments.com/connect/logout
+  grant_types_supported:
+  - authorization_code
+  - client_credentials
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:device_code
+  - urn:ietf:params:oauth:grant-type:token-exchange
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  - client_secret_post
+  - client_secret_jwt
+  - private_key_jwt
+  - tls_client_auth
+  - self_signed_tls_client_auth
+  code_challenge_methods_supported:
+  - S256
+  dpop_signing_alg_values_supported:
+  - RS256
+  - RS384
+  - RS512
+  - PS256
+  - PS384
+  - PS512
+  - ES256
+  - ES384
+  - ES512
+  tls_client_certificate_bound_access_tokens: true
+  id_token_signing_alg_values_supported:
+  - RS256
+  source: https://api.meshpayments.com/.well-known/openid-configuration
+notable:
+- PKCE S256 is the only code challenge method advertised.
+- DPoP (RFC 9449) sender-constrained tokens are supported across nine signing algorithms.
+- mTLS client authentication (RFC 8705) is supported both with a CA-issued and a self-signed
+  certificate, and certificate-bound access tokens are enabled.
+- Private-key JWT and client-secret JWT client authentication are supported alongside
+  the basic/post forms.
+- RFC 7591 dynamic client registration is exposed at /as/register.
+- Token exchange (RFC 8693) is an advertised grant type.
+- Platform sign-in also supports SAML SSO with passwordless access and enforces MFA
+  per https://meshpayments.com/security-is-our-priority/.
+x-evidence:
+- fetched: '2026-08-04'
+  url: https://api.meshpayments.com/.well-known/openid-configuration
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://api.meshpayments.com/.well-known/oauth-authorization-server
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://kb.meshpayments.com/support/integrators-corner/does-mesh-offer-restful-api-integration/
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://developers.meshpayments.com
+  http_status: 401
+  note: WWW-Authenticate Basic

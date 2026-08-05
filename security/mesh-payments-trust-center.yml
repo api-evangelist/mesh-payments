@@ -1,0 +1,67 @@
+generated: '2026-08-04'
+method: searched
+probe: true
+probe_result: no trust.meshpayments.com or security.meshpayments.com host exists (NXDOMAIN),
+  and /trust and /security both 404; the compliance posture is published on a single
+  marketing-path security page instead of a dedicated trust center.
+url: https://meshpayments.com/security-is-our-priority/
+dedicated_trust_center: false
+certifications:
+- name: SOC 1 Type II
+  auditor: KPMG
+  cadence: annual external audit
+- name: SOC 2 Type II
+  auditor: KPMG
+  cadence: annual external audit
+  note: covers security, availability and confidentiality; continuous compliance monitoring
+    with Drata
+- name: PCI DSS
+  level: Level 1 Service Provider
+- name: GDPR
+  kind: regulatory compliance
+- name: CCPA
+  kind: regulatory compliance
+- name: Vendor Security Alliance (VSA)
+  kind: core self-assessment completed
+controls_published:
+- encryption at rest with AES-256
+- encryption in transit with TLS 1.2+
+- multi-factor authentication required
+- SAML SSO with passwordless access
+- continuous penetration testing
+- static and dynamic code analysis plus software composition analysis (SCA)
+- zero-trust VPN for remote access
+- documented incident response procedures
+- daily AWS backups with disaster recovery
+- least-privilege access with audit logging
+- EDR malware detection
+- annual security awareness training
+report_access: 'SOC report detail is available on request via https://meshpayments.com/contact-us/
+  - not self-serve.'
+gaps:
+- No self-serve trust portal (Vanta/Drata/SafeBase style) and no downloadable evidence
+  under NDA; reports are request-only through a contact form.
+- No public status page or uptime history was found on any Mesh host, so the availability
+  half of the SOC 2 claim is not independently observable.
+evidence:
+- source: https://meshpayments.com/security-is-our-priority/
+  http_status: 200
+  keywords:
+  - soc 1
+  - soc 2 type ii
+  - pci dss
+  - gdpr
+  - ccpa
+  - kpmg
+  - penetration testing
+- source: https://meshpayments.com/blog/mesh-payments-is-soc-2-certified/
+  http_status: 200
+  keywords:
+  - soc 2
+  - kpmg
+  - drata
+- source: https://trust.meshpayments.com/
+  http_status: 0
+  note: DNS does not resolve
+x-evidence:
+  fetched: '2026-08-04'

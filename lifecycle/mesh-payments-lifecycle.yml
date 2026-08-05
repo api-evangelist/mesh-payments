@@ -1,0 +1,43 @@
+generated: '2026-08-04'
+method: searched
+source: live probes of Mesh hosts plus published Mesh pages
+versioning:
+  scheme: unknown
+  current: null
+  docs: https://developers.meshpayments.com
+  note: no version identifier is observable anonymously; the versioning policy, if
+    any, is on the Basic-auth-gated developers portal
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: no deprecation or sunset policy is published on any anonymously readable Mesh
+    page. No Deprecation pointer is wired in apis.yml because none was found.
+sla:
+  url: null
+  uptime_target: null
+  note: SOC 2 Type II covers availability, but no published SLA or uptime target was
+    found
+status_page: null
+status_page_note: 'no status page found. status.meshpayments.com does not resolve (NXDOMAIN);
+  no Statuspage/Instatus/Better Stack page was located. No StatusPage pointer is wired
+  in apis.yml.'
+product_changelog:
+  url: https://meshpayments.com/feature-updates/
+  scope: product feature updates, undated and unversioned
+  api_changelog: false
+  note: this is a product feature-update feed, not an API changelog. No API version
+    history, breaking-change notice or dated release list is published anonymously.
+deprecated_operations: []
+gaps:
+- No status page. For a payments and card-issuing platform this is the most conspicuous
+  operational-transparency gap - customers have no way to see incident or uptime history.
+- No API changelog, no versioning policy, no deprecation or Sunset (RFC 8594) policy.
+  API consumers get no public notice surface for breaking changes.
+probes:
+- url: https://status.meshpayments.com/
+  status: 0
+  note: DNS does not resolve
+- url: https://meshpayments.com/feature-updates/
+  status: 200
+x-evidence:
+  fetched: '2026-08-04'

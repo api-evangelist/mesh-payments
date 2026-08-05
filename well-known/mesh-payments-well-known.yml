@@ -1,0 +1,105 @@
+generated: '2026-08-04'
+method: searched
+source: live probes of every host in apis.yml
+hosts:
+- host: https://api.meshpayments.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: mesh-payments-openid-configuration.json
+    note: OpenID Connect Discovery 1.0
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: mesh-payments-oauth-authorization-server.json
+    note: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: mesh-payments-oauth-protected-resource.json
+    note: RFC 9728 Protected Resource Metadata; names https://api.meshpayments.com/mcp
+      as the protected resource
+  - path: /.well-known/oauth-protected-resource/mcp
+    status: 200
+    content_type: application/json
+    file: mesh-payments-oauth-protected-resource-mcp.json
+    note: per-resource metadata referenced by the WWW-Authenticate Bearer challenge
+      on the MCP endpoint
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/api-catalog
+    status: 401
+  - path: /.well-known/ai-plugin.json
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  - path: /as/jwks
+    status: 200
+    content_type: application/json
+    note: JWKS endpoint; publishes a key with kid "mcp-signing-key". Not mirrored into
+      the repo because signing keys rotate.
+- host: https://meshpayments.com
+  documents:
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/mesh-payments-llms.txt
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://developers.meshpayments.com
+  note: entire host is served behind CloudFront HTTP Basic authentication; every path
+    returns 401 with WWW-Authenticate:Basic
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  - path: /llms.txt
+    status: 401
+- host: https://kb.meshpayments.com
+  documents:
+  - path: /llms.txt
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /robots.txt
+    status: 200
+  - path: /sitemap.xml
+    status: 200
+- host: https://app.meshpayments.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+summary:
+  security_txt: false
+  openid_configuration: true
+  oauth_authorization_server: true
+  oauth_protected_resource: true
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false
+x-evidence:
+  fetched: '2026-08-04'

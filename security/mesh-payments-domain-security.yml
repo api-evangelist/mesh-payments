@@ -1,0 +1,32 @@
+generated: '2026-08-04'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: meshpayments.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  2 11:09:24 2026 GMT
+  hsts: false
+- host: developers.meshpayments.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 15 23:59:59 2026 GMT
+  hsts: false
+  note: served by CloudFront behind HTTP Basic authentication (401 with WWW-Authenticate
+    Basic); no Strict-Transport-Security header observed on the 401 response
+- host: api.meshpayments.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 15 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  note: Strict-Transport-Security max-age=31536000 includeSubDomains observed on the
+    401 challenge response
+domains:
+- domain: meshpayments.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

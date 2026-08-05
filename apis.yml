@@ -1,23 +1,143 @@
 aid: mesh-payments
 name: Mesh Payments
-description: 'Mesh Payments is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Mesh Payments is a global travel and expense (T&E) and spend management
+  platform for finance teams, combining corporate virtual and physical card issuing,
+  expense management, accounts payable, procurement (ProcurePay), travel booking and
+  accounting automation in a single system. Mesh exposes a RESTful API on api.meshpayments.com
+  for virtual card lifecycle management, merchant and category controls, metadata tagging,
+  authorization and settlement retrieval and real-time balance queries, authenticated
+  with either HMAC-SHA256 request signing or OAuth 2.0 client credentials. It also
+  publishes an OAuth-protected Model Context Protocol (MCP) server at api.meshpayments.com/mcp
+  and a configurable webhooks surface, plus ERP, HRIS and TMC integrations.'
+image: https://meshpayments.com/wp-content/uploads/2026/05/meshpayments.png
 url: https://raw.githubusercontent.com/api-evangelist/mesh-payments/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
 - Company
-apis: []
+- Payments
+- Spend Management
+- Expense Management
+- Corporate Cards
+- Travel
+- Accounts Payable
+- Fintech
+- Card Issuing
+- Accounting Automation
+apis:
+- name: Mesh Payments API
+  description: 'RESTful API for the Mesh spend management platform. Documented capabilities
+    include connectivity verification, virtual card lifecycle management (issuance,
+    suspension, cancellation), merchant and category limitation configuration, metadata
+    tagging for tracking, authorization and settlement data retrieval, and real-time
+    account balance access. Authentication is HMAC-SHA256 request signing or OAuth
+    2.0 client credentials. Full endpoint reference and code samples (Python, Node.js,
+    Java, C#, PHP) are published on the Mesh Developers Portal, which is served behind
+    HTTP Basic authentication.'
+  humanURL: https://developers.meshpayments.com
+  baseURL: https://api.meshpayments.com
+  tags:
+  - Payments
+  - Corporate Cards
+  - Card Issuing
+  - Spend Management
+  properties:
+  - type: Documentation
+    url: https://developers.meshpayments.com
+  - type: Authentication
+    url: authentication/mesh-payments-authentication.yml
+  - type: OAuthScopes
+    url: scopes/mesh-payments-scopes.yml
+  - type: Webhooks
+    url: asyncapi/mesh-payments-webhooks.yml
+- name: Mesh Payments MCP Server
+  description: 'OAuth-protected Model Context Protocol (MCP) server operated by Mesh
+    at api.meshpayments.com/mcp. The endpoint advertises RFC 9728 OAuth 2.0 Protected
+    Resource Metadata at /.well-known/oauth-protected-resource/mcp and challenges
+    unauthenticated JSON-RPC calls with a WWW-Authenticate Bearer header. Mesh describes
+    its orchestration layer as MCP-compatible so customers can connect their own AI
+    agents and build workflows on top of Mesh policy governance.'
+  humanURL: https://meshpayments.com/orchestration/
+  baseURL: https://api.meshpayments.com/mcp
+  tags:
+  - MCP
+  - Agents
+  - Spend Management
+  properties:
+  - type: MCPServer
+    url: mcp/mesh-payments-mcp.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/mesh-payments-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/mesh-payments_stock/
+  url: https://meshpayments.com/
+- type: DeveloperPortal
+  url: https://developers.meshpayments.com
+- type: Documentation
+  url: https://kb.meshpayments.com/support/integrators-corner/
+- type: Support
+  url: https://kb.meshpayments.com/
+- type: HelpCenter
+  url: https://kb.meshpayments.com/
+- type: Blog
+  url: https://meshpayments.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/mesh-payments
+- type: Pricing
+  url: https://meshpayments.com/pricing/
+- type: SignUp
+  url: https://app.meshpayments.com/
+- type: Login
+  url: https://app.meshpayments.com/
+- type: TermsOfService
+  url: https://meshpayments.com/legal/
+- type: PrivacyPolicy
+  url: https://meshpayments.com/privacy/
+- type: ChangeLog
+  url: https://meshpayments.com/feature-updates/
+- type: ChangeLog
+  url: changelog/mesh-payments-changelog.yml
+- type: Integrations
+  url: https://meshpayments.com/partners-and-integrations/
+- type: WellKnown
+  url: well-known/mesh-payments-well-known.yml
+- type: LLMsTxt
+  url: llms/mesh-payments-llms.txt
+- type: MCPServer
+  url: mcp/mesh-payments-mcp.yml
+- type: Authentication
+  url: authentication/mesh-payments-authentication.yml
+- type: OAuthScopes
+  url: scopes/mesh-payments-scopes.yml
+- type: Conventions
+  url: conventions/mesh-payments-conventions.yml
+- type: Lifecycle
+  url: lifecycle/mesh-payments-lifecycle.yml
+- type: Conformance
+  url: conformance/mesh-payments-conformance.yml
+- type: Compliance
+  url: https://meshpayments.com/security-is-our-priority/
+- type: Security
+  url: https://meshpayments.com/vulnerability-disclosure-policy/
+- type: VulnerabilityDisclosure
+  url: security/mesh-payments-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/mesh-payments-trust-center.yml
+- type: Webhooks
+  url: asyncapi/mesh-payments-webhooks.yml
+- type: Packages
+  url: packages/mesh-payments-packages.yml
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
+

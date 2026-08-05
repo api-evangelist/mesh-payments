@@ -1,0 +1,6 @@
+{
+  "resource_signing_alg_values_supported" : [ "RS256" ],
+  "resource" : "https://api.meshpayments.com/mcp",
+  "bearer_methods_supported" : [ "header" ],
+  "authorization_servers" : [ "https://api.meshpayments.com" ]
+}

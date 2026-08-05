@@ -1,0 +1,36 @@
+generated: '2026-08-04'
+method: searched
+source: https://meshpayments.com/feature-updates/
+type: product-feature-updates
+api_changelog: false
+scheme: none
+current_version: null
+note: Mesh maintains a product feature-updates feed on its marketing site. Entries are
+  narrative product notes without dates, version numbers or breaking-change flags, and
+  none of them describe API changes. There is no API changelog, no release notes and
+  no version history on any anonymously readable Mesh surface. Individual entries are
+  not mirrored here because none carries a date or version to structure.
+entries: []
+recent_entry_titles:
+- Offline fallback mechanism now available
+- Automatically update traveler itineraries
+- See additional OBT details
+- Daily updates for employees
+- Bulk upload expenses via .csv
+- Resubmit declined expenses
+- Improved searchability for flights
+- Attach travel-related documents
+- Close trips automatically after 60 days
+- View and filter payments pages by custom fields
+recent_entry_titles_source: https://meshpayments.com/llms.txt
+gaps:
+- Feature-update entries carry no dates, so no recency window can be established.
+- No API-facing changelog at all - an API consumer has no public surface on which a
+  breaking change would be announced.
+x-evidence:
+- fetched: '2026-08-04'
+  url: https://meshpayments.com/feature-updates/
+  http_status: 200
+- fetched: '2026-08-04'
+  url: https://meshpayments.com/llms.txt
+  http_status: 200
