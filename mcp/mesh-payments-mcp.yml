@@ -29,15 +29,14 @@ authentication:
   - urn:ietf:params:oauth:grant-type:token-exchange
   dynamic_client_registration: https://api.meshpayments.com/as/register
 tools: []
-tools_note: tools/list and initialize both return HTTP 401 without a bearer token,
-  so the live tool manifest and per-tool inputSchema require authenticated introspection
-  with Mesh-issued OAuth credentials. No tool list is published anonymously (the developers
-  portal that would document it is itself behind HTTP Basic auth), so none is recorded
-  here rather than guessed.
+tools_note: tools/list and initialize both return HTTP 401 without a bearer token, so the live tool manifest
+  and per-tool inputSchema require authenticated introspection with Mesh-issued OAuth credentials. No
+  tool list is published anonymously (the developers portal that would document it is itself behind HTTP
+  Basic auth), so none is recorded here rather than guessed.
 provider_statements:
 - source: https://meshpayments.com/orchestration/
-  quote: MCP-compatible. Connect your own AI agents. Build custom workflows on top
-    of Mesh's orchestration layer.
+  quote: MCP-compatible. Connect your own AI agents. Build custom workflows on top of Mesh's orchestration
+    layer.
 x-evidence:
 - fetched: '2026-08-04'
   url: https://api.meshpayments.com/.well-known/oauth-protected-resource
@@ -56,3 +55,10 @@ x-evidence:
   url: https://api.meshpayments.com/as/jwks
   http_status: 200
   note: publishes a signing key with kid "mcp-signing-key"
+deployment:
+  mode: remote
+  endpoint: https://api.meshpayments.com/mcp
+  verified: probed
+  probe: wall
+  checked: '2026-08-12'
+  source: catalog MCP census
