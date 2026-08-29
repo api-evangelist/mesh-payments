@@ -9,6 +9,17 @@ description: 'Mesh Payments is a global travel and expense (T&E) and spend manag
   with either HMAC-SHA256 request signing or OAuth 2.0 client credentials. It also
   publishes an OAuth-protected Model Context Protocol (MCP) server at api.meshpayments.com/mcp
   and a configurable webhooks surface, plus ERP, HRIS and TMC integrations.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://meshpayments.com/wp-content/uploads/2026/05/meshpayments.png
 url: https://raw.githubusercontent.com/api-evangelist/mesh-payments/refs/heads/main/apis.yml
 x-type: company
